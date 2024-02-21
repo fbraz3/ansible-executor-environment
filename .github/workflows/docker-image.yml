@@ -32,7 +32,7 @@ jobs:
           image: quay.io/fbraz3/local-ee
           tags: latest ${{ github.sha }}
           archs: amd64, arm64
-          workdir: context
+          workdir: ./context
           containerfiles: |
               ./Dockerfile
 
