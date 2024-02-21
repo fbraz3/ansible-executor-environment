@@ -1,0 +1,6 @@
+collections:
+  - name: ansible.posix
+  - name: community.zabbix
+  - name: community.general
+  - name: community.vmware
+  - name: dseeley.esxifree_guest
