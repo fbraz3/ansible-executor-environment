@@ -34,7 +34,7 @@ jobs:
           archs: amd64, arm64
           workdir: ./context
           containerfiles: |
-              ./Dockerfile
+              ./context/Dockerfile
 
       - name: Push To quay.io
         id: push-to-quay
