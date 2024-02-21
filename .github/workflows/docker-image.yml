@@ -32,9 +32,9 @@ jobs:
           image: quay.io/fbraz3/local-ee
           tags: latest ${{ github.sha }}
           archs: amd64, arm64
-          workdir: ./context
+          working-directory: ./context
           containerfiles: |
-              ./context/Dockerfile
+              ./Dockerfile
 
       - name: Push To quay.io
         id: push-to-quay
