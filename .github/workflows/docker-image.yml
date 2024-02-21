@@ -32,6 +32,11 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASS }}
 
+      - name: Create build context
+        run: |
+          pip3 install ansible-builder
+          ansible-builder create
+
       - name: Build and push
         uses: docker/build-push-action@v4
         with:
