@@ -45,3 +45,4 @@ jobs:
           push: true
           tags: |
              quay.io/fbraz3/local-ee
+             fbraz3/ansible-executor-environment
