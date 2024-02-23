@@ -4,12 +4,13 @@ Custom Ansible execution environment :: [Images on DockerHub](https://hub.docker
 
 the follow galaxy roles are installed by default
 
--I  ansible.posix
+- ansible.posix
 - community.zabbix
 - community.general
 - community.vmware
 - dseeley.esxifree_guest
-- And the follow python packages
+
+And the follow python packages
 
 - pycurl
 - PyVmomi
