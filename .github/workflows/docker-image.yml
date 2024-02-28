@@ -42,6 +42,7 @@ jobs:
         run: |
           pip3 install ansible-builder
           ansible-builder create
+          cp context/Containerfile context/Dockerfile
           ls -la
           ls -la context
 
