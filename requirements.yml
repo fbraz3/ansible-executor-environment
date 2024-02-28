@@ -8,3 +8,4 @@ collections:
 roles:
   - name: geerlingguy.php
   - name: benjamin-smith.ondrej-php-repo
+  - name: lukasic.mariadb
