@@ -1,12 +1,56 @@
-collections:
-  - name: ansible.posix
-  - name: community.zabbix
-  - name: community.general
-  - name: community.vmware
-  - name: dseeley.esxifree_guest
-  - name: oracle.oci
-  - name: community.digitalocean
+name: Build Docker Image
 
-roles:
-  - name: geerlingguy.php
-  - name: benjamin-smith.ondrej-php-repo
+on: 
+  workflow_dispatch:
+  schedule:
+    - cron: '10 10 * * 3'
+
+jobs:
+  docker:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v2
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}  
+
+      - name: Login to RedHat Registry
+        uses: docker/login-action@v3
+        with:
+          registry: registry.redhat.io
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASS }}
+
+      - name: Login to Quay Registry
+        uses: docker/login-action@v3
+        with:
+          registry: quay.io
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASS }}
+
+      - name: Create build context
+        run: |
+          pip3 install ansible-builder
+          ansible-builder create
+          ls -la
+          ls -la context
+
+      - name: Build and push
+        uses: docker/build-push-action@v4
+        with:
+          platforms: linux/amd64,linux/arm64
+          context: ./context
+          push: true
+          tags: |
+             quay.io/fbraz3/local-ee
+             fbraz3/ansible-executor-environment
