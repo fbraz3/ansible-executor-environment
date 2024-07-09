@@ -1,0 +1,13 @@
+collections:
+  - name: ansible.posix
+  - name: ansible.utils
+  - name: community.zabbix
+  - name: community.general
+  - name: community.vmware
+  - name: dseeley.esxifree_guest
+
+roles:
+  - name: geerlingguy.php
+  - name: geerlingguy.nginx
+  - name: benjamin-smith.ondrej-php-repo
+  - name: lukasic.mariadb
