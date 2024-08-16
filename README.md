@@ -9,6 +9,8 @@ the follow galaxy roles are installed by default
 - community.general
 - community.vmware
 - dseeley.esxifree_guest
+- awx.awx
+- julien_lecomte.proxmox
 
 And the follow python packages
 
