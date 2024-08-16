@@ -5,6 +5,8 @@ collections:
   - name: community.general
   - name: community.vmware
   - name: dseeley.esxifree_guest
+  - name: awx.awx
+  - name: julien_lecomte.proxmox
 
 roles:
   - name: geerlingguy.php
