@@ -1,4 +1,6 @@
 # ansible-executor-environment
+![Docker Build](https://github.com/fbraz3/ansible-executor-environment/actions/workflows/docker-image.yml/badge.svg
+)
 
 Custom Ansible execution environment :: [Images on DockerHub](https://hub.docker.com/r/fbraz3/ansible-executor-environment)
 
