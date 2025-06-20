@@ -3,3 +3,5 @@ PyVmomi
 fabric
 cryptography==36.0.2
 awxkit
+qrcode
+Pillow
