@@ -136,6 +136,9 @@ done
 $PYCMD -m venv /tmp/venv --system-site-packages
 source /tmp/venv/bin/activate
 
+# Update PIPCMD to use the venv pip after activation
+PIPCMD="pip"
+
 # If there is an upper-constraints.txt file in the source tree,
 # use it in the pip commands.
 if [ -f /tmp/src/upper-constraints.txt ] ; then
