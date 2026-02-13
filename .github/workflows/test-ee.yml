@@ -1,0 +1,75 @@
+name: Test Execution Environment
+
+on:
+  push:
+    branches:
+      - main
+      - master
+  pull_request:
+    branches:
+      - main
+      - master
+
+jobs:
+  test-ee:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
+      - name: Build test image
+        uses: docker/build-push-action@v6
+        with:
+          context: ./context
+          push: false
+          load: true
+          tags: test-ee:latest
+
+      - name: Test Ansible version
+        run: |
+          docker run --rm test-ee:latest ansible --version
+
+      - name: Test Ansible collections
+        run: |
+          docker run --rm test-ee:latest ansible-galaxy collection list
+
+      - name: Test Ansible plugins
+        run: |
+          docker run --rm test-ee:latest ansible-doc -l | head -20
+
+      - name: Run comprehensive test suite
+        run: |
+          docker run --rm -v ${{ github.workspace }}/test-ee.sh:/test-ee.sh:ro test-ee:latest bash /test-ee.sh
+          
+      - name: Validate Python environment
+        run: |
+          docker run --rm test-ee:latest python3 -c "
+          import sys
+          # Check Python version
+          print(f'Python: {sys.version}')
+          # Check required packages
+          try:
+              import ansible
+              print(f'Ansible: {ansible.__version__}')
+          except ImportError as e:
+              print(f'ERROR: Missing ansible - {e}')
+              sys.exit(1)
+          # Check Jinja2
+          try:
+              import jinja2
+              print(f'Jinja2: {jinja2.__version__}')
+          except ImportError as e:
+              print(f'ERROR: Missing Jinja2 - {e}')
+              sys.exit(1)
+          # Check PyYAML
+          try:
+              import yaml
+              print(f'PyYAML: {yaml.__version__}')
+          except ImportError as e:
+              print(f'ERROR: Missing PyYAML - {e}')
+              sys.exit(1)
+          print('All required packages available!')
+          "
