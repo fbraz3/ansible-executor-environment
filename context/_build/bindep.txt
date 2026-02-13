@@ -3,4 +3,5 @@
 #gcc-c++             [platform:rpm]
 #subversion          [platform:rpm]
 #subversion          [platform:dpkg]
-#git-lfs             [platform:rpm]libxml2-devel        [platform:rpm compile]
+#git-lfs             [platform:rpm]
+libxml2-devel        [platform:rpm]
