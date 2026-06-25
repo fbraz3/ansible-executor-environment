@@ -1,7 +1,7 @@
 pycurl
 PyVmomi
 fabric
-cryptography==46.0.5
+cryptography==46.0.6
 awxkit
 qrcode
 Pillow
